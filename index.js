@@ -65,7 +65,7 @@ app.use('/', createProxyMiddleware({
     }
 }));
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 app.listen(port, () => {
     console.log(`Proxy server running on port ${port}`);
     console.log(`Access Google via: http://localhost:${port}`);
