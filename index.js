@@ -4,7 +4,7 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 const app = express();
 
 // Proxy setup
-app.use('/proxy', createProxyMiddleware({
+app.use('/', createProxyMiddleware({
     target: 'https://www.himatsingka.com',  // Replace with your target URL
     changeOrigin: true,
     selfHandleResponse: false,
