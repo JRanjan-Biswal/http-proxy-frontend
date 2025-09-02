@@ -7,9 +7,58 @@
     <title>Document</title>
 </head>
 
-<body>
-    <iframe src="https://http-proxy-frontend.onrender.com/" height={500} width={500} referrerPolicy="origin"
-        sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+<body style="background-color: black;">
+    <div style="color: white; padding: 10px; font-family: Arial;">
+        <h3>Proxy Test - Himatsingka Website</h3>
+        <p>If you see this text, the main page loaded successfully.</p>
+        <p>The iframe below should show the Himatsingka website:</p>
+    </div>
+    <div style="color: white; margin: 10px;">
+        <p>Testing different iframe approaches:</p>
+        <button onclick="testIframe1()">Test Iframe 1 (Direct)</button>
+        <button onclick="testIframe2()">Test Iframe 2 (With Error Handling)</button>
+        <button onclick="testDirect()">Test Direct Access</button>
+    </div>
+    
+    <iframe 
+        id="testIframe"
+        height="600" 
+        width="100%" 
+        style="border: 2px solid white; position: fixed; top: 150px; left: 0; right: 0; bottom: 0;"
+        referrerPolicy="no-referrer"
+        allow="fullscreen; clipboard-write; clipboard-read; camera; microphone; geolocation"
+        onload="console.log('Iframe loaded successfully')"
+        onerror="console.log('Iframe failed to load')"
+    ></iframe>
+    
+    <script>
+        function testIframe1() {
+            document.getElementById('testIframe').src = 'http://localhost:3000/proxy';
+        }
+        
+        function testIframe2() {
+            const iframe = document.getElementById('testIframe');
+            iframe.onload = function() {
+                console.log('Iframe loaded successfully');
+                document.body.style.backgroundColor = 'green';
+            };
+            iframe.onerror = function() {
+                console.log('Iframe failed to load');
+                document.body.style.backgroundColor = 'red';
+            };
+            iframe.src = 'http://localhost:3000/proxy';
+        }
+        
+        function testDirect() {
+            window.open('http://localhost:3000/proxy', '_blank');
+        }
+        
+        // Auto-test on page load
+        window.onload = function() {
+            console.log('Page loaded, testing iframe...');
+            testIframe1();
+        };
+    </script>
 </body>
 
 </html>
